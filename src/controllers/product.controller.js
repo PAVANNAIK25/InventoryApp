@@ -20,8 +20,19 @@ export default class ProductController {
         return res.render("products", { products: products });
     }
 
-    updateProductView(req, res, next){
-        
+    getUpdateProductView(req, res, next){
+        //1. if product exists
+        const {id} = req.body;
+        const productFound = ProductModel.getByID(id);
+
+        if(productFound){
+            return res.render("update-product");
+        }
+
+        //2. return errors
+        else{
+            res.status(401).send('Product not found');
+        }
     }
 
 }

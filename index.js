@@ -26,6 +26,7 @@ const productController = new ProductController();
 
 server.get("/", productController.getProducts);
 server.get("/new", productController.getForm);
+server.get("/update-product", productController.getUpdateProductView);
 server.post("/new", validateRequest, productController.addNewProduct);
 
 export default server;
