@@ -8,7 +8,7 @@ const server = express();
 
 //using middleware to get data in body
 //server.use(express.json());
-server.use(express.urlencoded({ extended:true }));
+server.use(express.urlencoded({ extended: true }));
 
 
 server.set("view engine", "ejs");
@@ -25,8 +25,13 @@ const productController = new ProductController();
 //Routes
 
 server.get("/", productController.getProducts);
+
 server.get("/new", productController.getForm);
-server.get("/update-product", productController.getUpdateProductView);
+
+server.get("/update-product/:id", productController.getUpdateProductView);
+
 server.post("/new", validateRequest, productController.addNewProduct);
+
+server.post("/update-product", validateRequest, productController.postUpdateProduct);
 
 export default server;
