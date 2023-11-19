@@ -25,10 +25,11 @@
                     <%= product.price %>
                 </td>
                 <td>
-                    <img src="<%= product.imageUrl %>" alt="" />
+                    <img src="<%= product.imageUrl %>" alt="" style="width: 80px;" />
                 </td>
                 <td>
                     <a href="/update-product/<%= product.id %>" class="btn btn-warning">Update</a>
+                    <button type="submit" class="btn btn-danger" onclick="deleteProduct('<%= product.id %>')"> Delete </button>
                 </td>
 
             </tr>

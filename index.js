@@ -15,6 +15,7 @@ server.set("view engine", "ejs");
 server.set("views", path.join(path.resolve(), "src", "views"));
 
 // Layout Middleware
+server.use(express.static("public"));
 server.use(expressLayouts);
 server.use(express.static('src/views'));
 
@@ -29,6 +30,8 @@ server.get("/", productController.getProducts);
 server.get("/new", productController.getForm);
 
 server.get("/update-product/:id", productController.getUpdateProductView);
+
+server.post("/delete-product/:id", productController.deleteProduct);
 
 server.post("/new", validateRequest, productController.addNewProduct);
 
