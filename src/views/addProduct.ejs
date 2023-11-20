@@ -7,7 +7,7 @@
     </div>
 <% } %>
 
-<form action="/new" method="post">
+<form action="/new" method="post" enctype="multipart/form-data">
 
     <div class="mb-3">
         <label for="name" class="form-label">Product Name</label>
@@ -24,10 +24,11 @@
     </div>
 
     <div class="mb-3">
-        <label for="imageUrl" class="form-label">Image Url</label>
-        <input type="text" class="form-control" name="imageUrl" id="imageUrl" placeholder="Enter Image url">
+        <label for="imageUrl" class="form-label d-block">Image URL</label>
+        <!-- <input type="text" class="form-control" name="imageUrl" id="imageUrl" placeholder="Enter Image url"> -->
+        <input type="file" name="imageUrl" id="imageUrl" accept="images">
     </div>
 
-    <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    <button type="submit" class="btn btn-primary mb-3">Add Product</button>
 
 </form>
