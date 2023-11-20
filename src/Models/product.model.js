@@ -14,24 +14,25 @@ export default class ProductModel {
         return products;
     }
 
-    static add(productObj) {
-        let newProduct = new ProductModel(products.length + 1, productObj.name, productObj.desc, productObj.price, productObj.imageUrl);
+    static add(name, desc, price, imageUrl) {
+        let newProduct = new ProductModel(products.length + 1, name, desc, price, imageUrl);
         products.push(newProduct);
     }
 
-    static getByID(id){
+    static getByID(id) {
         return products.find((product) => id == product.id);
     }
 
-    static delete(id){
-        const index = products.findIndex((p) => p.id==id);
+    static delete(id) {
+        const index = products.findIndex((p) => p.id == id);
         products.splice(index, 1);
 
     }
 
-    static update(productObj){
-        const index = products.findIndex((p) => p.id==productObj.id);
+    static update(productObj, imageUrl) {
+        const index = products.findIndex((p) => p.id == productObj.id);
         products[index] = productObj;
+        products[index].imageUrl = imageUrl;
     }
 
 }

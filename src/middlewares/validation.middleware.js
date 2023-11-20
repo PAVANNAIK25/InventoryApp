@@ -7,7 +7,13 @@ const validateRequest = async (req, res, next) => {
         body('name').isLength({min : 5}).withMessage("Name cannot be empty or less than 5 characters"),
         body('desc').isLength({min : 10}).withMessage("Description cannot be empty or less than 10 characters"),
         body('price').isFloat({ gt : 0 }).withMessage("Price should be a positive number"),
-        body('imageUrl').isURL().withMessage("Please enter valid URL")  
+        body('imageUrl').custom(((value, { req })=>{
+            if(!req.file){
+                throw new Error("Image is required");
+            }
+            return true;
+        })),
+        // body('imageUrl').isURL().withMessage("Please enter valid URL")  
     ];
 
     // 2. running rules

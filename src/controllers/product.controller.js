@@ -16,7 +16,9 @@ export default class ProductController {
     // Add new product controller POST req
 
     addNewProduct(req, res) {
-        ProductModel.add(req.body);
+        const {name, desc, price} = req.body;
+        const imageUrl = "images/" + req.file.filename;
+        ProductModel.add(name, desc, price, imageUrl);
         let products = ProductModel.get();
         return res.render("products", { products: products });
     }
@@ -41,7 +43,9 @@ export default class ProductController {
     // Update product POST req
 
     postUpdateProduct(req, res){
-        ProductModel.update(req.body);
+        const imageUrl = "images/" + req.file.filename;
+        ProductModel.update(req.body, imageUrl);
+
         let products = ProductModel.get();
         return res.render("products", { products: products });
     }
