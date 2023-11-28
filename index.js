@@ -4,6 +4,7 @@ import ProductController from './src/controllers/product.controller.js';
 import expressLayouts from 'express-ejs-layouts';
 import validateRequest from './src/middlewares/validation.middleware.js';
 import { upload } from './src/middlewares/file-upload.middleware.js';
+import UserController from './src/controllers/user.controller.js';
 
 const server = express();
 
@@ -22,14 +23,19 @@ server.use(express.static('src/views'));
 
 // creating instance of productcontroller
 const productController = new ProductController();
+const userController = new UserController();
 
 // Get Routes
 server.get("/", productController.getProducts);
 server.get("/new", productController.getForm);
 server.get("/update-product/:id", productController.getUpdateProductView);
+server.get("/register", userController.userRegistration);
+server.get("/login", userController.userLogin);
 
 // POST Routes
 server.post("/delete-product/:id", productController.deleteProduct);
+server.post("/register", userController.postRegister);
+server.post("/login", userController.postLogin);
 
 server.post("/new", upload.single('imageUrl'), validateRequest, productController.addNewProduct);
 
