@@ -5,12 +5,12 @@ export default class ProductController {
 
     getProducts(req, res) {
         let products = ProductModel.get();
-        res.render("products", { products: products });
+        res.render("products", { products: products, userMail: req.session.userMail });
 
     }
 
     getForm(req, res) {
-        return res.render("addProduct", { errorMessage: null });
+        return res.render("addProduct", { errorMessage: null, userMail: req.session.userMail });
     }
 
     // Add new product controller POST req
@@ -20,7 +20,7 @@ export default class ProductController {
         const imageUrl = "images/" + req.file.filename;
         ProductModel.add(name, desc, price, imageUrl);
         let products = ProductModel.get();
-        return res.render("products", { products: products });
+        return res.render("products", { products: products, userMail: req.session.userMail });
     }
 
     // Update product view 
@@ -31,7 +31,7 @@ export default class ProductController {
         const productFound = ProductModel.getByID(id);
 
         if(productFound){
-            return res.render("update-product", {product: productFound, errorMessage:null});
+            return res.render("update-product", {product: productFound, errorMessage:null, userMail: req.session.userMail});
         }
 
         //2. return errors
@@ -47,7 +47,7 @@ export default class ProductController {
         ProductModel.update(req.body, imageUrl);
 
         let products = ProductModel.get();
-        return res.render("products", { products: products });
+        return res.render("products", { products: products, userMail: req.session.userMail });
     }
 
     // delete Product
@@ -59,7 +59,7 @@ export default class ProductController {
         }
         ProductModel.delete(id);
         let products = ProductModel.get();
-        res.render("products", { products: products });
+        res.render("products", { products: products, userMail: req.session.userMail });
     }
 
 }
